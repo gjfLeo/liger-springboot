@@ -15,6 +15,10 @@ public class TlText implements Serializable {
     private String headline;
     private String text;
 
+    public TlText(String headline) {
+        this(headline, StringUtils.EMPTY);
+    }
+
     public static TlText of(String headline, String text) {
         return new TlText(headline, StringUtils.defaultString(text));
     }

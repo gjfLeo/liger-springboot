@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liger.common.genshin.mapper.GenshinBattlePassMapper">
+
+    <select id="selectBattlePassList"
+            resultType="com.liger.common.genshin.dto.GenshinBattlePassDto">
+        SELECT *,
+               (SELECT start_date FROM genshin_version v WHERE v.version = b.version) start_date
+        FROM `genshin_battle_pass` b
+    </select>
+
+</mapper>

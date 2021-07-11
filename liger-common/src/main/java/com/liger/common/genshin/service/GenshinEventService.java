@@ -1,8 +1,11 @@
 package com.liger.common.genshin.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.liger.common.genshin.dto.GenshinBattlePassDto;
 import com.liger.common.genshin.dto.GenshinVersionDto;
+import com.liger.common.genshin.entity.GenshinBattlePassEntity;
 import com.liger.common.genshin.entity.GenshinEventEntity;
+import com.liger.common.genshin.mapper.GenshinBattlePassMapper;
 import com.liger.common.genshin.mapper.GenshinEventMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,8 @@ public class GenshinEventService {
     private GenshinEventMapper genshinEventMapper;
     @Autowired
     private GenshinVersionService genshinVersionService;
+    @Autowired
+    private GenshinBattlePassMapper genshinBattlePassMapper;
 
     public List<GenshinEventEntity> queryEventList() {
         List<GenshinEventEntity> eventList = genshinEventMapper.selectList(new QueryWrapper<>());
@@ -44,6 +49,10 @@ public class GenshinEventService {
                 .filter(event -> event.getStartDate() != null)
                 .filter(event -> event.getEndDate() != null)
                 .collect(Collectors.toList());
+    }
+
+    public List<GenshinBattlePassDto> queryBattlePassList() {
+        return genshinBattlePassMapper.selectBattlePassList();
     }
 
 }

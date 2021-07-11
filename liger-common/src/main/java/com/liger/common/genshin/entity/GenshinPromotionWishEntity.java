@@ -8,18 +8,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@TableName("genshin_event")
-public class GenshinEventEntity implements Serializable, HasBbsArticle {
+@TableName(value = "genshin_promotion_wish")
+public class GenshinPromotionWishEntity implements Serializable {
 
-    private Long id;
-    private String name;
-    private String subtitle;
+    private Integer id;
     private String type;
+    private String version;
+    private Integer number;
+    private String name;
     private Date startDate;
     private Date endDate;
-    private String version;
-    private String description;
     private String image;
-    private Integer bbsArticleId;
+    private String star5;
+    private String star4;
 
 }
