@@ -9,15 +9,19 @@ spring:
     datasource:
         dynamic:
             # 默认数据源
-            primary: master
+            primary: db
             # 设置严格模式（不使用默认）
-            strict: true
+            strict: false
             datasource:
-                common:
-                    url: jdbc:mysql://gjfleo.top:3306/common?characterEncoding=UTF-8
+                db:
+                    url: jdbc:mysql://gjfleo.top:3306/db?characterEncoding=UTF-8
                     username: root
                     password: Liger12311231
-                lol:
-                    url: jdbc:mysql://gjfleo.top:3306/lol?characterEncoding=UTF-8
-                    username: root
-                    password: Liger12311231
+
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+        default-property-inclusion: non_null
+
+mybatis-plus:
+    mapper-locations: classpath*:/mapper/**/*.xml

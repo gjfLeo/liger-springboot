@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liger.common.genshin.mapper.GenshinVersionMapper">
+
+    <select id="selectVersionList"
+            resultType="com.liger.common.genshin.dto.GenshinVersionDto">
+        SELECT *,
+               (SELECT IFNULL(
+                               DATE_SUB(MIN(`start_date`), INTERVAL 1 SECOND),
+                               DATE_ADD(t.`start_date`, INTERVAL 2 MONTH)
+                           )
+                FROM `genshin_version` t1
+                WHERE t1.start_date > t.start_date) AS end_date
+        FROM `genshin_version` t
+    </select>
+
+</mapper>

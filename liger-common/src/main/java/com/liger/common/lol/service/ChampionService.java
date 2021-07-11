@@ -3,7 +3,7 @@ package com.liger.common.lol.service;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.liger.common.common.constant.LigerDataSource;
-import com.liger.common.common.result.LigerResult;
+import com.liger.common.common.result.Result;
 import com.liger.common.common.util.HttpRequestUtils;
 import com.liger.common.common.util.LigerBeanUtils;
 import com.liger.common.lol.constant.ResourceUrl;
@@ -30,7 +30,7 @@ public class ChampionService {
     @Autowired
     private ChampionInfoMapper championInfoMapper;
 
-    public LigerResult<?> updateChampionInfo() {
+    public Result<?> updateChampionInfo() {
         String url = ResourceUrl.getChampionListUrl();
         try {
             ChampionListSourceDto championListSourceDto = HttpRequestUtils.get(url, ChampionListSourceDto.class);
@@ -44,13 +44,13 @@ public class ChampionService {
                         }
                     })
                     .sum();
-            return LigerResult.ok(result);
+            return Result.ok(result);
         } catch (Exception e) {
-            return LigerResult.error(e);
+            return Result.error(e);
         }
     }
 
-    public LigerResult<?> updateChampionInfoFull() {
+    public Result<?> updateChampionInfoFull() {
         List<String> failUrl = new ArrayList<>();
         int row = championInfoMapper.selectList(new QueryWrapper<>()).stream()
 //                .parallel()
@@ -79,7 +79,7 @@ public class ChampionService {
         Map<String, Object> result = new HashMap<>(2);
         result.put("row", row);
         result.put("fail", failUrl);
-        return LigerResult.ok(result);
+        return Result.ok(result);
     }
 
     public List<ChampionInfoEntity> getChampionInfoList() {
