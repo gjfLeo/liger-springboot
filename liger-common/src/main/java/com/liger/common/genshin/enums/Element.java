@@ -1,5 +1,6 @@
-package com.liger.common.genshin.constant;
+package com.liger.common.genshin.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 
 @Getter
@@ -13,12 +14,20 @@ public enum Element {
     CYRO(6, "冰"),
     GEO(7, "岩");
 
+    @EnumValue
     private final int id;
     private final String name;
 
     Element(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public static Element getElementById(Integer id) {
+        for (Element value : values()) {
+            if (value.id == id) return value;
+        }
+        return null;
     }
 
 }

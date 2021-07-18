@@ -1,5 +1,6 @@
-package com.liger.common.genshin.constant;
+package com.liger.common.genshin.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 
 @Getter
@@ -8,6 +9,7 @@ public enum PromotionWishType {
     CHARACTER("character", "角色活动祈愿"),
     WEAPON("weapon", "武器活动祈愿");
 
+    @EnumValue
     private final String code;
     private final String name;
 

@@ -1,6 +1,7 @@
 package com.liger.common.genshin.service;
 
-import com.liger.common.genshin.dto.GenshinVersionDto;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.liger.common.genshin.entity.GenshinVersionEntity;
 import com.liger.common.genshin.mapper.GenshinVersionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,16 +15,22 @@ import java.util.stream.Collectors;
 public class GenshinVersionService {
 
     @Autowired
-    private GenshinVersionMapper genshinVersionMapper;
+    private GenshinVersionMapper versionMapper;
 
-    public List<GenshinVersionDto> queryVersionList() {
-        return genshinVersionMapper.selectVersionList();
+    public List<GenshinVersionEntity> queryVersionList() {
+        return versionMapper.selectList(new QueryWrapper<>());
     }
 
-    public Map<String, GenshinVersionDto> queryVersionMap() {
-        List<GenshinVersionDto> versionList = this.queryVersionList();
+    public Map<String, GenshinVersionEntity> queryVersionMap() {
+        List<GenshinVersionEntity> versionList = this.queryVersionList();
         return versionList.stream()
-                .collect(Collectors.toMap(GenshinVersionDto::getVersion, Function.identity()));
+                .collect(Collectors.toMap(GenshinVersionEntity::getVersion, Function.identity()));
+    }
+
+    public GenshinVersionEntity queryVersion(String version) {
+        QueryWrapper<GenshinVersionEntity> wrapper = new QueryWrapper<GenshinVersionEntity>()
+                .eq("version", version);
+        return versionMapper.selectOne(wrapper);
     }
 
 }

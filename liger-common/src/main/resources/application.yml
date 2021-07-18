@@ -25,3 +25,4 @@ spring:
 
 mybatis-plus:
     mapper-locations: classpath*:/mapper/**/*.xml
+    typeEnumsPackage: com.liger.common.*.enums

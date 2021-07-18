@@ -1,5 +1,6 @@
-package com.liger.common.genshin.constant;
+package com.liger.common.genshin.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 
 @Getter
@@ -9,6 +10,7 @@ public enum EventType {
     WEB("web", "网页活动", "web"),
     INVITE("invite", "招募活动", "invite");
 
+    @EnumValue
     private final String value;
     private final String name;
     private final String prefix;

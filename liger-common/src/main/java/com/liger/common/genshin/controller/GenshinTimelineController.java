@@ -6,16 +6,17 @@ import com.liger.common.common.model.timeline.TlSlide;
 import com.liger.common.common.model.timeline.TlText;
 import com.liger.common.common.result.ResultResponseBody;
 import com.liger.common.common.util.timeline.TimelineDataBuilder;
-import com.liger.common.genshin.constant.EventType;
-import com.liger.common.genshin.constant.PromotionWishType;
 import com.liger.common.genshin.constant.ResourceUrl;
-import com.liger.common.genshin.dto.GenshinBattlePassDto;
+import com.liger.common.genshin.entity.GenshinBattlePassEntity;
 import com.liger.common.genshin.entity.GenshinEventEntity;
 import com.liger.common.genshin.entity.GenshinPromotionWishEntity;
+import com.liger.common.genshin.enums.EventType;
+import com.liger.common.genshin.enums.PromotionWishType;
 import com.liger.common.genshin.service.GenshinEventService;
 import com.liger.common.genshin.service.GenshinVersionService;
 import com.liger.common.genshin.service.GenshinWishService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +43,13 @@ public class GenshinTimelineController {
                 .setDatePattern("MM/dd HH:mm");
 
         genshinVersionService.queryVersionList().stream()
+                .filter(version -> version.getEndDate() != null)
                 .map(version -> builder.buildEra(version.getStartDate(), version.getEndDate(),
+                        version.getVersion() + ' ' + version.getName()))
+                .forEach(builder::addEra);
+        genshinVersionService.queryVersionList().stream()
+                .filter(version -> version.getEndDate() == null)
+                .map(version -> builder.buildEra(version.getStartDate(), DateUtils.addDays(version.getStartDate(), 42),
                         version.getVersion() + ' ' + version.getName()))
                 .forEach(builder::addEra);
 
@@ -62,27 +69,27 @@ public class GenshinTimelineController {
         genshinWishService.queryPromotionWishList().stream()
                 .map(wish -> {
                     TlSlide slide = builder.buildSlide(wish.getStartDate(), wish.getEndDate());
-                    slide.setText(new TlText(wish.getName(), PromotionWishType.getNameByCode(wish.getType())));
+                    slide.setText(new TlText(wish.getName(), wish.getType().getName()));
                     TlMedia media = new TlMedia(wish.getImage());
-                    if (PromotionWishType.getValueByCode(wish.getType()) == PromotionWishType.CHARACTER) {
+                    if (wish.getType() == PromotionWishType.CHARACTER) {
                         media.setThumbnail(String.format(ResourceUrl.CHARACTER_HEAD_IMAGE_URL, wish.getStar5()));
                     }
                     slide.setMedia(media);
-                    slide.setGroup(PromotionWishType.getNameByCode(wish.getType()));
+                    slide.setGroup(wish.getType().getName());
                     slide.setUnique_id(getUniqueId(wish));
                     return slide;
                 })
                 .forEach(builder::addEvent);
 
         genshinEventService.queryTimeLimitedEventList().stream()
-                .filter(event -> EventType.getValueByCode(event.getType()) != EventType.INVITE)
+                .filter(event -> event.getType() != EventType.INVITE)
                 .map(event -> {
                     TlSlide slide = builder.buildSlide(event.getStartDate(), event.getEndDate());
                     slide.setText(new TlText(event.getName(), event.getDescription()));
                     TlMedia media = new TlMedia(event.getImage());
                     media.setLink(event.getBbsArticleUrl());
                     slide.setMedia(media);
-                    slide.setGroup(EventType.getNameByCode(event.getType()));
+                    slide.setGroup(event.getType().getName());
                     slide.setUnique_id(getUniqueId(event));
                     return slide;
                 })
@@ -91,7 +98,7 @@ public class GenshinTimelineController {
         return builder.build();
     }
 
-    private String getUniqueId(GenshinBattlePassDto battlePass) {
+    private String getUniqueId(GenshinBattlePassEntity battlePass) {
         return "battlePass-" + battlePass.getVersion();
     }
 
@@ -100,8 +107,7 @@ public class GenshinTimelineController {
     }
 
     private String getUniqueId(GenshinEventEntity event) {
-        EventType eventType = EventType.getValueByCode(event.getType());
-        String prefix = eventType != null ? eventType.getPrefix() : StringUtils.EMPTY;
+        String prefix = event.getType() != null ? event.getType().getPrefix() : StringUtils.EMPTY;
         return prefix + "-" + event.getName();
     }
 

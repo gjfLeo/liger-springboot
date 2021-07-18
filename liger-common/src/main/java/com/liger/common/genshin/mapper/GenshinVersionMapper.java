@@ -1,15 +1,11 @@
 package com.liger.common.genshin.mapper;
 
-import com.liger.common.genshin.dto.GenshinVersionDto;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.liger.common.genshin.entity.GenshinVersionEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Mapper
 @Component
-public interface GenshinVersionMapper {
-
-    List<GenshinVersionDto> selectVersionList();
-
+public interface GenshinVersionMapper extends BaseMapper<GenshinVersionEntity> {
 }
