@@ -1,16 +1,21 @@
 spring:
     datasource:
         dynamic:
-            # Ä¬ÈÏÊı¾İÔ´
-            primary: master
-            # ÉèÖÃÑÏ¸ñÄ£Ê½£¨²»Ê¹ÓÃÄ¬ÈÏ£©
-            strict: true
+            # é»˜è®¤æ•°æ®æº
+            primary: db
+            # è®¾ç½®ä¸¥æ ¼æ¨¡å¼ï¼ˆä¸ä½¿ç”¨é»˜è®¤ï¼‰
+            strict: false
             datasource:
-                common:
-                    url: jdbc:mysql://gjfleo.top:3306/common
+                db:
+                    url: jdbc:mysql://gjfleo.top:3306/db?characterEncoding=UTF-8
                     username: root
                     password: Liger12311231
-                lol:
-                    url: jdbc:mysql://gjfleo.top:3306/lol
-                    username: root
-                    password: Liger12311231
+
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+        default-property-inclusion: non_null
+
+mybatis-plus:
+    mapper-locations: classpath*:/mapper/**/*.xml
+    typeEnumsPackage: com.liger.common.*.enums
