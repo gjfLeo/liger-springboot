@@ -1,4 +1,4 @@
-package com.liger.common;
+package com.liger.local.config;
 
 import com.liger.common.common.result.Result;
 import com.liger.common.common.result.ResultException;

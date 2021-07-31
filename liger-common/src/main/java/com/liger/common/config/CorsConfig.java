@@ -1,4 +1,4 @@
-package com.liger.common;
+package com.liger.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
