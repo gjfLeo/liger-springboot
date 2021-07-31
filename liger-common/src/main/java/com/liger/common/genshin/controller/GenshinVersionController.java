@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @ResultResponseBody
-@RequestMapping(value = "/genshin/version")
+@RequestMapping("/genshin/version")
 public class GenshinVersionController {
 
     @Autowired

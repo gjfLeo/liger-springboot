@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/genshin/character")
+@RequestMapping("/genshin/character")
 public class GenshinCharacterController {
 
     @Autowired

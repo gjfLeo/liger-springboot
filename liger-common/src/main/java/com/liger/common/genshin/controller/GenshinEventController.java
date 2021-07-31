@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ResultResponseBody
-@RequestMapping(value = "/genshin/event")
+@RequestMapping("/genshin/event")
 public class GenshinEventController {
 
     @Autowired

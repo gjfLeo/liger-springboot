@@ -25,7 +25,7 @@ import java.util.Calendar;
 
 @RestController
 @ResultResponseBody
-@RequestMapping(value = "/genshin/timeline")
+@RequestMapping("/genshin/timeline")
 public class GenshinTimelineController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class GenshinTimelineController {
     @Autowired
     private GenshinWishService genshinWishService;
 
-    @RequestMapping(value = "/data.json")
+    @RequestMapping("/data.json")
     public TlData data() {
         TimelineDataBuilder builder = new TimelineDataBuilder();
         builder.setTitleText("原神活动时间线")
