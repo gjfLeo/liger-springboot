@@ -1,4 +1,4 @@
-package com.liger.common.common.mybatis;
+package com.liger.common.common.mybatis.method;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
@@ -19,8 +19,6 @@ public class Replace extends AbstractMethod {
 
     @Override
     public MappedStatement injectMappedStatement(Class<?> mapperClass, Class<?> modelClass, TableInfo tableInfo) {
-
-
         KeyGenerator keyGenerator = new NoKeyGenerator();
         String columnScript = SqlScriptUtils.convertTrim(tableInfo.getAllInsertSqlColumnMaybeIf(null),
                 LEFT_BRACKET, RIGHT_BRACKET, null, COMMA);

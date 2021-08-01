@@ -6,6 +6,10 @@ import java.util.function.Predicate;
 
 public abstract class PredicateUtils {
 
+    public static <T> Predicate<T> not(Predicate<T> predicate) {
+        return t -> !predicate.test(t);
+    }
+
     public static <T, R> Predicate<T> fieldNonNull(Function<T, R> fieldFunction) {
         return field(fieldFunction, Objects::nonNull);
     }
