@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liger.local.genshin.mapper.GenshinDataEquipAffixMapper">
+
+<!--    <update id="batchReplace">-->
+<!--        REPLACE INTO-->
+<!--        genshin__data_equip_affix-->
+<!--        (affix_id, id, name_text_map_hash, desc_text_map_hash, level, open_config)-->
+<!--        VALUES-->
+<!--        <foreach item="item" index="index" collection="list"-->
+<!--                 separator=",">-->
+<!--            (-->
+<!--            #{item.affixId}, #{item.id},-->
+<!--            #{item.nameTextMapHash}, #{item.descTextMapHash},-->
+<!--            #{item.level}, #{item.openConfig}-->
+<!--            )-->
+<!--        </foreach>-->
+<!--    </update>-->
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liger.local.genshin.mapper.GenshinDataSubtitleMapper">
+
+<!--    <update id="batchReplace">-->
+<!--        REPLACE INTO-->
+<!--            genshin__data_subtitle (file, content)-->
+<!--        VALUES-->
+<!--        <foreach item="item" index="index" collection="list"-->
+<!--                 separator=",">-->
+<!--            (#{item.file}, #{item.content})-->
+<!--        </foreach>-->
+<!--    </update>-->
+
+</mapper>
