@@ -31,7 +31,7 @@ public class HttpRequestController {
             String resultStr;
             switch (StringUtils.defaultIfBlank(method, "get").toLowerCase()) {
                 case "get":
-                    resultStr = HttpRequestUtils.get(url);
+                    resultStr = HttpRequestUtils.doGet(url);
                     break;
                 case "post":
                     return Result.of(HttpStatus.SC_NOT_IMPLEMENTED, "Method POST has not been implemented.");
